@@ -13,6 +13,6 @@ app.listen(8080, function () {
 
 */
 
-app.get("/pet", function (request, response) {
-  response.send("here is Pet Zone");
+app.get("/pet", function (req, res) {
+  res.send("here is Pet Zone");
 });
