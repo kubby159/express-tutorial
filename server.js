@@ -16,3 +16,7 @@ app.listen(8080, function () {
 app.get("/pet", function (req, res) {
   res.send("here is Pet Zone");
 });
+
+app.get("/beauty", function (req, res) {
+  res.send("뷰티용품 사세요!");
+});
