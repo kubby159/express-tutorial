@@ -20,3 +20,8 @@ app.get("/pet", function (req, res) {
 app.get("/beauty", function (req, res) {
   res.send("뷰티용품 사세요!");
 });
+
+app.get("/", function (req, res) {
+  //해당 파일을 보내줌.
+  res.sendFile(__dirname + "/index.html");
+});
