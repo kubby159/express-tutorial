@@ -1,3 +1,5 @@
+<!-- 글을 발행할 수 있는 파일 -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -51,19 +53,29 @@
         </ul>
       </div>
     </nav>
-    <div class="jumbotron">
-      <h1 class="display-4">Hello, Jay!</h1>
-      <p class="lead">
-        This is a simple hero unit, a simple jumbotron-style component for
-        calling extra attention to featured content or information.
-      </p>
-      <hr class="my-4" />
-      <p>
-        It uses utility classes for typography and spacing to space content out
-        within the larger container.
-      </p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </div>
+    <form class="container-lg">
+      <h1>일상을 기록하다..</h1>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">오늘의 할일</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="오늘의 할일"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">세부내용</label>
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          placeholder="세부내용"
+        ></textarea>
+      </div>
+      <button type="button" class="btn btn-primary">Primary</button>
+    </form>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
