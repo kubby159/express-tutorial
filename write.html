@@ -53,15 +53,16 @@
         </ul>
       </div>
     </nav>
-    <form class="container-lg">
+    <form class="container-lg mt-4" action="/add" method="POST">
       <h1>일상을 기록하다..</h1>
       <div class="form-group">
         <label for="exampleFormControlInput1">오늘의 할일</label>
         <input
-          type="email"
+          type="text"
           class="form-control"
           id="exampleFormControlInput1"
           placeholder="오늘의 할일"
+          name="title"
         />
       </div>
 
@@ -72,9 +73,10 @@
           id="exampleFormControlTextarea1"
           rows="3"
           placeholder="세부내용"
+          name="detail"
         ></textarea>
       </div>
-      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="submit" class="btn btn-primary">submit</button>
     </form>
     <!-- Optional JavaScript; choose one of the two! -->
 
