@@ -12,5 +12,10 @@ app.get("/pet", function (request, response) {
 });
 
 app.get("/beauty", function (request, response) {
-  response.send("뷰티용품 쇼핑 페이지입니다.");
+  response.send("뷰티용품 쇼핑 페이지임");
+});
+
+//html 파일을 보내는 방법.
+app.get("/", function (request, response) {
+  response.sendFile(__dirname + "/index.html");
 });
