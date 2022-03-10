@@ -16,7 +16,7 @@ MongoClient.connect(
     }
 
     //todoapp 이라는 db로 연결
-    // db = client.db("todoapp");
+    db = client.db("todoapp");
 
     //post 라는 파일(collection) 에 insertOne 한다. 저장할 데이터에는 Object 자료형이 들어간다.
     // db.collection('post').insertOne('저장할 데이터',(error,result)=>{
@@ -47,18 +47,12 @@ app.get("/write", function (request, response) {
   response.sendFile(__dirname + "/write.html");
 });
 
-app.post("/add", (request, response) => {
-  MongoClient.connect(
-    "mongodb+srv://admin:qwer1234@cluster0.5bxyw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    (error, client) => {
-      db = client.db("todoapp");
-      db.collection("post").insertOne(
-        { title: request.body.title, detail: request.body.detail },
-        (error, result) => {
-          console.log(error);
-          console.log(result);
-        }
-      );
+app.post("/add", function (요청, 응답) {
+  응답.send("전송완료");
+  db.collection("post").insertOne(
+    { 제목: 요청.body.title, 날짜: 요청.body.detail },
+    function () {
+      console.log("저장완료");
     }
   );
 });
