@@ -7,6 +7,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 let db;
 const MongoClient = require("mongodb").MongoClient;
+app.set("view engine", "ejs");
+
 MongoClient.connect(
   "mongodb+srv://admin:qwer1234@cluster0.5bxyw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   (error, client) => {
@@ -45,6 +47,12 @@ app.get("/", function (request, response) {
 
 app.get("/write", function (request, response) {
   response.sendFile(__dirname + "/write.html");
+});
+
+//데이터 list
+//서버에서 ejs 파일로 보내는 법
+app.get("/list", (request, response) => {
+  response.render("list.ejs");
 });
 
 app.post("/add", function (요청, 응답) {
