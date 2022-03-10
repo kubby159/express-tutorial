@@ -2,6 +2,9 @@
 const express = require("express");
 const app = express();
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.listen(8080, function () {
   console.log("Hello world");
 });
@@ -22,4 +25,10 @@ app.get("/", function (request, response) {
 
 app.get("/write", function (request, response) {
   response.sendFile(__dirname + "/write.html");
+});
+
+app.post("/add", (request, response) => {
+  response.send("전송완료");
+  console.log(request.body.detail);
+  console.log(request.body.title);
 });
