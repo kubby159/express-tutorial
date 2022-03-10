@@ -32,3 +32,19 @@ app.post("/add", (request, response) => {
   console.log(request.body.detail);
   console.log(request.body.title);
 });
+
+/*
+REST API
+웹 개발 시 API 란?
+웹서버와 고객간의 소통 방법 ( 서버와 통신하는 방법 )
+
+1. Uniform interface
+- 하나의 자료는 하나의 URL
+2. Client-Server 역할 구분
+- 브라우저는 요청만, 서버는 응답만
+3. Stateless
+- 요청 1과 요청 2는 의존성이 없어야 한다.
+4. Cacheable
+- 서버에서 보내주는 정보들은 캐싱이 가능해야한다.(브라우저가 알아서 해줌)
+
+*/
