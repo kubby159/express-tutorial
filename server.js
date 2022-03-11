@@ -52,7 +52,9 @@ app.get("/write", function (request, response) {
 //데이터 list
 //서버에서 ejs 파일로 보내는 법
 app.get("/list", (request, response) => {
-  response.render("list.ejs");
+  db.collection("post")
+    .find()
+    .toArray((error, result) => response.render("list.ejs", { posts: result }));
 });
 
 app.post("/add", function (요청, 응답) {
