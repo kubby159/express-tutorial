@@ -59,10 +59,15 @@ app.get("/list", (request, response) => {
 
 app.post("/add", function (요청, 응답) {
   응답.send("전송완료");
-  db.collection("post").insertOne(
-    { 제목: 요청.body.title, 날짜: 요청.body.detail },
-    function () {
-      console.log("저장완료");
-    }
-  );
+  db.collection("counter").findOne({ name: "게시물갯수" }, (error, result) => {
+    //1. counter collection에서  게시물 개수를 가지고 오면
+    let totalPosts = result.totalPost;
+    //2. 게시물 개수를  post collection 디비에 저장한다.
+    db.collection("post").insertOne(
+      { _id: totalPosts + 1, 제목: 요청.body.title, 날짜: 요청.body.detail },
+      function () {
+        console.log("저장완료");
+      }
+    );
+  });
 });
