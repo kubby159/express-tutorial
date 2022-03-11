@@ -65,8 +65,14 @@ app.post("/add", function (요청, 응답) {
     //2. 게시물 개수를  post collection 디비에 저장한다.
     db.collection("post").insertOne(
       { _id: totalPosts + 1, 제목: 요청.body.title, 날짜: 요청.body.detail },
-      function () {
-        console.log("저장완료");
+      () => {
+        db.collection("counter").updateOne(
+          { name: "게시물갯수" },
+          { $inc: { totalPost: 1 } },
+          (error, result) => {
+            console.log("수정완료");
+          }
+        );
       }
     );
   });
