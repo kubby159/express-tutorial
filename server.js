@@ -85,6 +85,16 @@ app.delete("/delete", (request, response) => {
     console.log("삭제완료");
     //응답코드 200을 보내주세요.
 
-    response.status(400).send({ message: "실패했어요." });
+    response.status(200).send({ message: "성공했어요" });
   });
+});
+
+app.get("/detail/:id", (request, response) => {
+  db.collection("post").findOne(
+    { _id: parseInt(request.params.id) },
+    (error, result) => {
+      console.log(result);
+      response.render("detail.ejs", { data: result });
+    }
+  );
 });
