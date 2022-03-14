@@ -57,18 +57,29 @@
       <li class="list-group-item">
         <h4>할일 제목 : <%= posts[i].제목 %></h4>
         <p>할일 마감날짜 : <%= posts[i].날짜%></p>
-        <button>삭제</button>
+        <button class="delete" data-id="<%=posts[i]._id%>">삭제</button>
       </li>
       <% }%>
     </ul>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script>
-      $.ajax({ method: "DELETE", url: "/delete", data: "123" }).done(
-        (result) => {
-          console.log(result);
-        }
-      );
+      //새로고침할 때마다 다음 함수가 실행이 된다.
+      //그러나 우리는 삭제 버튼을 눌렀을 때만 실행되길 원한다.
+
+      const deleteBtn = document.querySelectorAll(".delete");
+      deleteBtn.forEach((e) => {
+        e.addEventListener("click", (e) => {
+          let postNumber = e.target.dataset.id;
+          $.ajax({
+            method: "DELETE",
+            url: "/delete",
+            data: { _id: postNumber },
+          }).done(function (result) {
+            window.location.reload(true);
+          });
+        });
+      });
     </script>
 
     <!-- Optional JavaScript; choose one of the two! -->

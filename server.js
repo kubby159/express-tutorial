@@ -80,5 +80,8 @@ app.post("/add", function (요청, 응답) {
 
 app.delete("/delete", (request, response) => {
   //요청 시 보낸 데이터를 찾기 위해서 request.body 이용
-  console.log(request.body);
+  request.body._id = parseInt(request.body._id);
+  db.collection("post").deleteOne(request.body, (error, result) => {
+    console.log("삭제완료");
+  });
 });
