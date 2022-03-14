@@ -67,18 +67,18 @@
       //새로고침할 때마다 다음 함수가 실행이 된다.
       //그러나 우리는 삭제 버튼을 눌렀을 때만 실행되길 원한다.
 
-      const deleteBtn = document.querySelectorAll(".delete");
-      deleteBtn.forEach((e) => {
-        e.addEventListener("click", (e) => {
-          let postNumber = e.target.dataset.id;
-          $.ajax({
-            method: "DELETE",
-            url: "/delete",
-            data: { _id: postNumber },
-          }).done(function (result) {
-            window.location.reload(true);
+      $(".delete").click(function (e) {
+        $.ajax({
+          method: "DELETE",
+          url: "/delete",
+          data: { _id: e.target.dataset.id },
+        })
+          .done((결과) => {
+            $(this).parent("li").fadeOut();
+          })
+          .fail((a, b, c) => {
+            console.log(a, b, c);
           });
-        });
       });
     </script>
 

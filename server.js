@@ -83,5 +83,8 @@ app.delete("/delete", (request, response) => {
   request.body._id = parseInt(request.body._id);
   db.collection("post").deleteOne(request.body, (error, result) => {
     console.log("삭제완료");
+    //응답코드 200을 보내주세요.
+
+    response.status(400).send({ message: "실패했어요." });
   });
 });
