@@ -9,6 +9,9 @@ let db;
 const MongoClient = require("mongodb").MongoClient;
 app.set("view engine", "ejs");
 
+//서버에게 static 파일을 보관하기 위해 public 폴더를 쓴다고 말해주는 것
+app.use("/public", express.static("public"));
+
 MongoClient.connect(
   "mongodb+srv://admin:qwer1234@cluster0.5bxyw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
   (error, client) => {
@@ -80,6 +83,7 @@ app.post("/add", function (요청, 응답) {
 
 app.delete("/delete", (request, response) => {
   //요청 시 보낸 데이터를 찾기 위해서 request.body 이용
+  console.log(request.body);
   request.body._id = parseInt(request.body._id);
   db.collection("post").deleteOne(request.body, (error, result) => {
     console.log("삭제완료");
