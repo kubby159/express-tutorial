@@ -7,8 +7,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 let db;
 const MongoClient = require("mongodb").MongoClient;
-app.set("view engine", "ejs");
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
 
+app.set("view engine", "ejs");
 //서버에게 static 파일을 보관하기 위해 public 폴더를 쓴다고 말해주는 것
 app.use("/public", express.static("public"));
 
@@ -99,6 +101,29 @@ app.get("/detail/:id", (request, response) => {
     (error, result) => {
       console.log(result);
       response.render("detail.ejs", { data: result });
+    }
+  );
+});
+
+app.get("/edit/:id", (request, response) => {
+  db.collection("post").findOne(
+    {
+      _id: parseInt(request.params.id),
+    },
+    (error, result) => {
+      console.log(result);
+      response.render("edit.ejs", { post: result });
+    }
+  );
+});
+
+app.put("/edit", (request, response) => {
+  db.collection("post").updateOne(
+    { _id: parseInt(request.body.id) },
+    { $set: { 제목: request.body.title, 날짜: request.body.detail } },
+    (erorr, result) => {
+      console.log("수정완료");
+      response.redirect("/list");
     }
   );
 });
