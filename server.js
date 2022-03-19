@@ -127,3 +127,31 @@ app.put("/edit", (request, response) => {
     }
   );
 });
+
+const passport = require("passport");
+const localStrategy = require("passport-local");
+const session = require("express-session");
+
+app.use(
+  session({ secret: "비밀코드", resave: true, saveUninitialized: false })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("/login", (request, response) => {
+  response.render("login.ejs");
+});
+
+//local 방식으로 회원인지 인증하는 방법
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/fail",
+  }),
+  (request, response) => {
+    //로그인 성공 시
+    response.redirect("/");
+  }
+);
+
+passport.use(new localStrategy());
