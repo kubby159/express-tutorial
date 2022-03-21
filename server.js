@@ -156,7 +156,7 @@ app.post(
 
 //local strategy 인증방법
 passport.use(
-  new LocalStrategy(
+  new localStrategy(
     {
       usernameField: "id",
       passwordField: "pw",
