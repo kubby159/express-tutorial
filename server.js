@@ -169,9 +169,10 @@ passport.use(
         { id: 입력한아이디 },
         function (에러, 결과) {
           if (에러) return done(에러);
-
+          //!결과가 존재하지 않는다면(아이디가 없다면) 실행
           if (!결과)
             return done(null, false, { message: "존재하지않는 아이디요" });
+          // DB에 아이디가 있으면, 입력한 비번과 결과.pw 비교.
           if (입력한비번 == 결과.pw) {
             return done(null, 결과);
           } else {
@@ -182,3 +183,15 @@ passport.use(
     }
   )
 );
+//id를 이용해서 세션을 저장시키는 코드(로그인 성공 시 발동)
+//user에 위 결과가 보내짐.
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+//이 세션 데이터를 가진 사람을 DB에서 찾아주세요(마이페이지 접속 시 발동)
+passport.deserializeUser((아이디, done) => {
+  done(null, {});
+});
+
+//세션 데이터를 만들고 난 후 세션의 ID정보를 쿠키로 보내준다.
